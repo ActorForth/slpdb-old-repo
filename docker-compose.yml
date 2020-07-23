@@ -1,33 +1,56 @@
-mongodb:
-  image: mongo:4.2-bionic
-  #image: mongo:4.0
-  container_name: mongo-slpdb
-  ports:
-    - "12301:27017"
-  volumes:
-    - ../data/mongodb:/data/db
-  command: mongod --logpath=/dev/null # -- quiet
-  restart: always
+version: "3"
+services:
+  mongodb:
+    image: mongo:4.2-bionic
+    #image: mongo:4.0
+    container_name: mongo-slpdb
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ../data/mongodb:/data/db
+    command: mongod
+    restart: always
+    networks:
+      - bitcoin-bridging
+  
+  slpdb:
+    build:
+     context: .
+     dockerfile: Dockerfile
+    # dockerfile: Dockerfile
+    #image: christroutner/slpdb-mainnet_slpdb:0.15.5
+    container_name: slpdb
+    links:
+      - mongodb
+    volumes:
+      - ./data/leveldb:/home/safeuser/SLPDB/_leveldb
+      - ./config:/home/safeuser/config
+    restart: always
+    networks:
+      - bitcoin-bridging
+  
+  slpserve:
+    # build: ./slpserve/
+    build:
+     context: ./slpserve/
+     dockerfile: Dockerfile
+    #image: christroutner/slpdb-mainnet_slpserve:0.15.5
+    container_name: slpserve
+    volumes:
+      - ./slpserve/config:/home/safeuser/config
+    links:
+      - mongodb
+    ports:
+      - "12300:4000"
+    restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - bitcoin-bridging
+  
 
-slpdb:
-  build: .
-  dockerfile: Dockerfile
-  #image: christroutner/slpdb-mainnet_slpdb:0.15.5
-  container_name: slpdb
-  links:
-    - mongodb
-  volumes:
-    - ../data/leveldb:/home/safeuser/SLPDB/_leveldb
-    - ../config:/home/safeuser/config
-  restart: always
-
-slpserve:
-  build: ./slpserve/
-  dockerfile: Dockerfile
-  #image: christroutner/slpdb-mainnet_slpserve:0.15.5
-  container_name: slpserve
-  links:
-    - mongodb
-  ports:
-    - "12300:4000"
-  restart: always
+networks:
+  bitcoin-bridging:
+    external: true

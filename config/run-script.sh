@@ -7,16 +7,21 @@
 # Set the MongoDB IP address and port. By default uses the MongoDB Docker
 # container bundled in the docker-compose.yml file.
 #export db_url=mongodb://localhost:27017
-export db_url=mongodb://172.17.0.1:12301
+export db_url=mongodb://mongo-slpdb:27017
+echo db_url $db_url
+./node_modules/migrate-mongo/bin/migrate-mongo.js up
+echo "Finished DB migrations."
 
 
 # Set the full node IP address and port
-export rpc_host=172.17.0.1
-export rpc_port=8332
-export rpc_user=bitcoin
-export rpc_pass=password
-
-export zmq_incoming_host=172.17.0.1
+export rpc_protocol='http'
+export rpc_host=bitcoin-unlimited
+export rpc_port=18332
+export rpc_user=admin
+export rpc_pass=adminpassword
+export core_from=543375
+export core_from_testnet=0
+export zmq_incoming_host=bitcoin-unlimited
 export zmq_incoming_port=28332
 
 # Turn off graph search

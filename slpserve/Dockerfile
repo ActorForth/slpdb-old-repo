@@ -21,8 +21,6 @@ WORKDIR /home/safeuser/slpserve
 RUN npm install
 COPY env .env
 
-CMD ["npm", "start"]
+COPY startup-script.sh startup-script.sh
+CMD ["./startup-script.sh"]
 
-#COPY startup-script.sh startup-script.sh
-#CMD ["./startup-script.sh"]
-#CMD ["bitcoind", "-conf=/home/bitcoin/.bitcoin/bitcoin.conf", "-datadir=/data", "-disablewallet"]
