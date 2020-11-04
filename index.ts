@@ -21,7 +21,21 @@ let getBlockchainInfoSync: () => BlockchainInfoResult = sp(RpcClient.getBlockcha
 let setNetworkSync: (network: string) => void = sp(Info.setNetwork);
 let queryInitSync: () => void = sp(Query.init);
 let chain = getBlockchainInfoSync().chain;
-let network = chain === 'test' || chain  === 'regtest' ? 'testnet' : 'mainnet';
+let network : string
+switch (chain) {
+  case 'mainnet':
+    network = 'mainnet'
+    break
+  case 'testnet':
+    network = 'testnet'
+    break
+  case 'regtest':
+    network = 'regtest'
+    break
+  default:
+    network = 'mainnet'
+}
+
 setNetworkSync(network);
 queryInitSync();
 
