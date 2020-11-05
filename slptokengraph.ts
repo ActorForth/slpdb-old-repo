@@ -1,5 +1,6 @@
-import { SlpTransactionDetails, SlpTransactionType, LocalValidator, 
-         Utils, Slp, Primatives, SlpVersionType } from 'slpjs';
+import { SlpTransactionDetails, SlpTransactionType, LocalValidator,
+         Utils, Slp, Primatives, SlpVersionType } from 'slpjs-regtest';
+
 import BigNumber from 'bignumber.js';
 import { BITBOX } from 'bitbox-sdk';
 import * as bitcore from 'bitcore-lib-cash';
@@ -572,7 +573,11 @@ export class SlpTokenGraph {
     private getAddressStringFromTxnOutput(txn: bitcore.Transaction, outputIndex: number) {
         let address;
         try {
-            address = Utils.toSlpAddress(bitbox.Address.fromOutputScript(txn.outputs[outputIndex]._scriptBuffer, this._network));
+            if (this._network === 'regtest'){
+              address = Utils.toSlpRegtestAddress(bitbox.Address.fromOutputScript(txn.outputs[outputIndex]._scriptBuffer, 'bchreg'));
+            } else{
+              address = Utils.toSlpAddress(bitbox.Address.fromOutputScript(txn.outputs[outputIndex]._scriptBuffer, this._network));
+            }
         }
         catch (_) {
             try {
