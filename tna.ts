@@ -51,7 +51,7 @@ export class TNA {
                     try { address = Utils.toSlpAddress(input.script.toAddress(net).toString(bitcore.Address.CashAddrFormat));
                       if (options.network === 'regtest'){
                         address = Utils.toSlpRegtestAddress(input.script.toAddress(net).toString(bitcore.Address.CashAddrFormat));
-                      } else{
+                      } else {
                         address = Utils.toSlpAddress(input.script.toAddress(net).toString(bitcore.Address.CashAddrFormat));
                       }
                     } catch(_) { }
