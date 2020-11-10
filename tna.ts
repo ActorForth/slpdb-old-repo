@@ -128,7 +128,6 @@ export class TNA {
                       }
                     } catch(_) { }
                     if (address && address.length > 0) {
-                      // TODO:
                         receiver.a = address;
                     }
                     xput.e = receiver;
