@@ -9,20 +9,12 @@ let bitcore = require('bitcore-lib-cash');
 
 export class TNA {
     fromTx(gene: Bitcore.Transaction, options?: any): TNATxn {
-        let net : string
-        switch (options.network) {
-          case 'mainnet':
-            net = bitcore.Networks.livenet
-            break
-          case 'testnet':
-            net = bitcore.Networks.testnet
-            break
-          case 'regtest':
-            net = bitcore.Networks.regtest
-            break
-          default:
-            net = bitcore.Networks.livenet
+        const networksAvailable: any = {
+          "mainnet": bitcore.Networks.livenet,
+          "testnet": bitcore.Networks.testnet,
+          "regtest": bitcore.Networks.regtest
         }
+        let net: any = networksAvailable[options.network] === undefined ? networksAvailable['mainnet'] : networksAvailable[options.network]
 
         let t = gene.toObject()
         let inputs: Xput[] = [];
