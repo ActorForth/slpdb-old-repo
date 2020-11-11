@@ -51,7 +51,7 @@ USER safeuser
 # Clone the SLPDB repository
 WORKDIR /home/safeuser
 #RUN git clone https://github.com/christroutner/SLPDB
-RUN git clone https://github.com/ActorForth/slpdb.git
+RUN git clone https://github.com/ActorForth/SLPDB-src.git
 
 # Checkout the last QA'd version.
 WORKDIR /home/safeuser/SLPDB
