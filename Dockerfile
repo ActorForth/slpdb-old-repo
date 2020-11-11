@@ -51,11 +51,11 @@ USER safeuser
 # Clone the SLPDB repository
 WORKDIR /home/safeuser
 #RUN git clone https://github.com/christroutner/SLPDB
-RUN git clone https://github.com/simpleledger/SLPDB
+RUN git clone https://github.com/ActorForth/slpdb.git
 
 # Checkout the last QA'd version.
 WORKDIR /home/safeuser/SLPDB
-RUN git checkout 54714dfec7f82487d6d08dca19ae88918e7f8eef
+RUN git checkout develop
 
 # Install dependencies.
 RUN npm install
