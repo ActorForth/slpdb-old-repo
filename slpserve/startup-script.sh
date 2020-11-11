@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# This startup script becomes part of the Docker image. It is used
-# to grab the run-script from the persistant volume and run it.
-# Edit the run-script.sh if you need to change the way SLPDB runs,
-# including environment variables.
-# cp ~/config/run-script.sh ~/SLPDB/run-script.sh
-~/config/run-script.sh
+export db_name=slpdb_test
+export db_url=mongodb://mongo-slpdb:27017
+export slpserve_port=4000
+export slpserve_timeout=30000
+export slpserve_log=true
+
+npm start

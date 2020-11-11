@@ -21,6 +21,6 @@ WORKDIR /home/safeuser/slpserve
 RUN npm install
 COPY env .env
 
-COPY startup-script.sh startup-script.sh
-CMD ["./startup-script.sh"]
+COPY startup-script.sh start.sh
+CMD ["./start.sh"]
 
