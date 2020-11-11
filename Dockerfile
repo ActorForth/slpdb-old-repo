@@ -54,7 +54,7 @@ WORKDIR /home/safeuser
 RUN git clone https://github.com/ActorForth/SLPDB-src.git
 
 # Checkout the last QA'd version.
-WORKDIR /home/safeuser/SLPDB
+WORKDIR /home/safeuser/SLPDB-src
 RUN git checkout develop
 
 # Install dependencies.
