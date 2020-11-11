@@ -5,7 +5,7 @@
 ## BEGIN BOILERPLATE SETUP
 
 FROM ubuntu:18.04
-MAINTAINER Chris Troutner <chris.troutner@gmail.com>
+LABEL Nicolai Skye <nicolaiskye@icloud.com>
 
 # Update the OS and install any OS packages needed.
 RUN apt-get update -y
@@ -27,7 +27,7 @@ RUN echo safeuser:abcd8765 | chpasswd
 WORKDIR /home/safeuser
 
 COPY dummyapp.js dummyapp.js
-CMD ["node", "dummyapp.js"]
+# CMD ["node", "dummyapp.js"]
 
 # END BOILERPLATE SETUP
 
