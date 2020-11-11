@@ -5,7 +5,7 @@
 ## BEGIN BOILERPLATE SETUP
 
 FROM ubuntu:18.04
-MAINTAINER Chris Troutner <chris.troutner@gmail.com>
+LABEL Nicolai Skye <nicolaiskye@icloud.com>
 
 # Update the OS and install any OS packages needed.
 RUN apt-get update -y
@@ -27,7 +27,7 @@ RUN echo safeuser:abcd8765 | chpasswd
 WORKDIR /home/safeuser
 
 COPY dummyapp.js dummyapp.js
-CMD ["node", "dummyapp.js"]
+# CMD ["node", "dummyapp.js"]
 
 # END BOILERPLATE SETUP
 
@@ -54,7 +54,7 @@ WORKDIR /home/safeuser
 RUN git clone https://github.com/ActorForth/SLPDB-src.git
 
 # Checkout the last QA'd version.
-WORKDIR /home/safeuser/SLPDB
+WORKDIR /home/safeuser/SLPDB-src
 RUN git checkout develop
 
 # Install dependencies.
@@ -64,5 +64,5 @@ RUN npm install
 VOLUME /home/safeuser/SLPDB/_leveldb
 VOLUME /home/safeuser/config
 
-COPY startup-script.sh startup-script.sh
-CMD ["./startup-script.sh"]
+COPY startup-script.sh start.sh
+CMD ["./start.sh"]

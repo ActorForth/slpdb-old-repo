@@ -1,5 +1,5 @@
 FROM christroutner/ct-base-ubuntu
-MAINTAINER Chris Troutner <chris.troutner@gmail.com>
+LABEL Nicolai Skye <nicolaiskye@icloud.com>
 
 RUN apt-get update -y
 
@@ -19,8 +19,7 @@ RUN git clone https://github.com/christroutner/slpserve
 #RUN git clone https://github.com/fountainhead-cash/slpserve
 WORKDIR /home/safeuser/slpserve
 RUN npm install
-COPY env .env
 
-COPY startup-script.sh startup-script.sh
-CMD ["./startup-script.sh"]
+COPY startup-script.sh start.sh
+CMD ["./start.sh"]
 
