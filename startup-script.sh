@@ -23,12 +23,12 @@ export core_from=543375
 export core_from_testnet=0
 export zmq_incoming_host=bitcoind-regtest
 export zmq_incoming_port=28332
+export zmq_outgoing_host=0.0.0.0
+export zmq_outgoing_port=27339
+export zmq_outgoing_enable=1
 
 # Turn off graph search
 export enable_graph_search=0
-
-# Turn off ZMQ output port
-export zmq_outgoing_enable=0
 
 # Set the telemtry name for this node
 export telemetry_advertised_host=trout-docker-unedited

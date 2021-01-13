@@ -14,7 +14,7 @@ services:
     restart: always
     networks:
       - bitcoin-bridging
-  
+
   slpdb:
     build:
      context: .
@@ -22,6 +22,10 @@ services:
     # dockerfile: Dockerfile
     #image: christroutner/slpdb-mainnet_slpdb:0.15.5
     container_name: slpdb
+    expose:
+      - "27339"
+    ports:
+      - "27339:27339"
     links:
       - mongodb
     volumes:
@@ -30,7 +34,7 @@ services:
     restart: always
     networks:
       - bitcoin-bridging
-  
+
   slpserve:
     # build: ./slpserve/
     build:
@@ -49,7 +53,7 @@ services:
       - mongodb
     networks:
       - bitcoin-bridging
-  
+
 
 networks:
   bitcoin-bridging:
